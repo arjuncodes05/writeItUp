@@ -4,7 +4,7 @@ import Input from './Input'
 import Button from "./Button"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import {useLocation, useNavigate } from 'react-router-dom'
+import {Link, useLocation, useNavigate } from 'react-router-dom'
 import authService from '../../Appwrite/AuthService'
 import { AuthContext } from '../../context/authContext'
 
