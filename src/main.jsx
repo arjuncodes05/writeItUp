@@ -9,6 +9,9 @@ import CreateBlog from "./pages/CreateBlog.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
 import Home from './pages/Home.jsx'
 import Blog from './pages/Blog.jsx'
+import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
+import { AuthProvider } from './context/authContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -40,11 +43,21 @@ const router = createBrowserRouter([
         element: <Blog/>,
       },      
     ]
-  }
+  },
+  {
+    path: '/login',
+    element: <Login/>,
+  },      
+  {
+    path: '/signup',
+    element: <Signup/>,
+  }, 
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <RouterProvider router={router}/>
+      <AuthProvider>
+        <RouterProvider router={router}/>
+      </AuthProvider>
   </StrictMode>,
 )

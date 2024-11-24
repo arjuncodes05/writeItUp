@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { AuthContext } from '../../context/authContext'
 
 
 function NavLinks(){
+
+    const [isUser, setIsUser] = useContext(AuthContext)
+    const navigate = useNavigate();
+
+    function handleNavigate(e){
+        e.preventDefault()
+        if(!isUser){
+            alert('NO user')
+            return 
+        }
+        navigate('/create/new')
+    }
+
     return (
         <>
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/blogs/all'>Blogs</NavLink>
-            <NavLink to='/create/new'>New Blog</NavLink>
-            <NavLink to='/dashboard'>Dashboard</NavLink>
+            <NavLink className={({isActive}) => isActive ? '' : '' } onClick={handleNavigate}>New Blog</NavLink>
+            {
+                isUser ? <NavLink to={`/user/${isUser.$id}`}>Dashboard</NavLink> :
+                <NavLink to='/login'>Login/Signup</NavLink>
+            }
+                
         </>
     )
 }
@@ -37,7 +55,7 @@ function Nav() {
         </nav>
         {
             isOpen && (
-                <div className='flex flex-col items-center basis-full pt-3 mt-3 border-t border-slate-200'>
+                <div className='flex sm:hidden flex-col items-center basis-full pt-3 mt-3 border-t border-slate-200'>
                     <NavLinks/>
                 </div>
             )

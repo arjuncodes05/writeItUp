@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import RTE from '../components/Tinymce/RTE';
 import { faChevronDown, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PostInDB from '../Appwrite/posts';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 
 export default function CreateBlog() {
@@ -16,6 +17,7 @@ export default function CreateBlog() {
   const [content, setContent] = useState('<H1>Hello World</h1>')
 
   const navigate = useNavigate();
+  const [isUser, setIsUser] = useContext(AuthContext)
 
   const handleEditorChange = (newContent) => {
     setContent(newContent);    
@@ -53,14 +55,14 @@ export default function CreateBlog() {
       }
     } else if(ifUpdate.pathname.includes('/create/new')) {
         const {$id: imageId} = await PostInDB.uploadImage(thumbnail) 
-        response = await PostInDB.createPost(title, category, content, imageId)
+        response = await PostInDB.createPost(title, category, content, imageId, isUser.$id)
       }
     navigate('/blog', {state: {postData: response}})
   }
 
 
   return (
-    <div className='p-8 bg-primary'>
+    <div className='p-8 bg-primary min-h-screen'>
       <form onSubmit={(e) => handleSubmitPost(e)} action="" className='flex flex-col justify-center gap-3'>
         <div className='flex flex-col font-semibold'>
           <label className='text-md' htmlFor="title">Title</label>

@@ -8,7 +8,7 @@ function BlogPostCard({post}) {
   
   return (
     <Link to='/blog' state={{postData: post}}
-      className='flex gap-5 items-center border p-5 my-5 lg:w-4/6 w-full h-auto sm:h-[125px] cursor-pointer overflow-hidden'>
+      className='flex gap-5 hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] rounded-sm items-center border p-5 my-5 lg:w-4/6 w-full h-auto sm:h-[125px] cursor-pointer overflow-hidden'>
           <div className='lg:w-[25%] w-[200px] overflow-hidden'>
               {
                 post.imageId ? 
@@ -16,7 +16,7 @@ function BlogPostCard({post}) {
                 : <img className='opacity-20 p-6' src={noImg} alt="" />
               }
           </div>
-          <div className='flex flex-col w-full'>
+          <div className='flex flex-col gap-1 w-full'>
               <h4 className='sm:text-md text-sm font-semibold text-red-600'>{post.category}</h4>
               <div>
                   <h2 className='sm:text-xl text-md font-bold'>{post.title}</h2>
