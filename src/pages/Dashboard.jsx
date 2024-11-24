@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import authService from '../Appwrite/AuthService'
-import noImg from "../assets/noImg.png"
 import { useNavigate } from 'react-router-dom';
 import { BlogPostsContext } from '../context/blogPostsContext';
 import { AuthContext } from '../context/authContext';
 import BlogPostCard from "../components/BlogPostCard.jsx"
 import noBlogs from "../assets/noBlogs.jpg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function Dashboard() {
-
   const [isLoading, data, isError, fetchData] = useContext(BlogPostsContext)
-  console.log(data);
-  
+
   const [isUser, setIsUser] = useContext(AuthContext)
   const [myPosts, setMyPosts] = useState([])
 
@@ -37,8 +36,9 @@ function Dashboard() {
   return (
     <div className='flex flex-col min-h-remaining justify-center items-center gap-4 bg-primary'>
       <div className='flex flex-col sm:flex-row sm:justify-between items-center w-[600px] sm:h-[300px] m-2'>
-        <div className='h-[150px] aspect-square border-2 rounded-full p-2 bg-secondary'>
-          <img src={noImg} alt="" />
+        <div className='h-[150px] aspect-square border-2 rounded-full p-2 bg-secondary flex justify-center items-center'>
+          {/* <img src={noImg} alt="" /> */}
+          <FontAwesomeIcon className='text-8xl opacity-50 text-black' icon={faUser} />
         </div>
         <div className='w-4/6 flex flex-col gap-1 justify-center items-center sm:items-start'>
           <h1 className='text-2xl font-semibold cursor-pointer'>{isUser.name}</h1>

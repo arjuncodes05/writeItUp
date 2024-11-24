@@ -12,37 +12,29 @@ function GetInForm() {
   const {pathname} =   useLocation() 
   const navigate = useNavigate()
   const [isUser, setIsUser] = useContext(AuthContext)
-
-  async function deleteSession(){
-    const a = await authService.signout()
-    console.log(a);
-    
-  }
-
-  deleteSession();
   
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')  
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     
     if(pathname === '/signup'){
-        const user = await authService.createAccount(email, password, username)
-        console.log(user);        
+        const user = await authService.createAccount(email, password, username)       
         if(user){
             setIsUser(user)
+            setLoading(false)
             navigate(`/user/${user.$id}`)
         }
     } else if(pathname === '/login'){
         const session = await authService.login(email, password)
-        console.log(session);
         if(session){
             const user = await authService.getUser()
-            console.log("user: ", user);
-            
             setIsUser(user)
+            setLoading(false)
             navigate(`/user/${user.$id}`)
         }
     }
@@ -63,7 +55,7 @@ function GetInForm() {
                 }
                 <Input value={email} setValue={setEmail} id='email' label ='Email' type='text' />
                 <Input value={password} setValue={setPassword} id='password' label ='Password' type='password' />
-                <Button text={pathname === '/signup' ? 'Signup' : 'Login'} />
+                <Button text={pathname === '/signup' ? (loading ? 'Signing up...' : 'Signup') : (loading ? 'Logging in...' : 'Login')} />
             </form>
         </div>
     </div>

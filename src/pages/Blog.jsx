@@ -12,9 +12,6 @@ function Blog() {
    const {state: {postData}} =  useLocation()
    const [isUser, setIsUser] = useContext(AuthContext)
 
-   console.log("ok- ", isUser.$id === postData.authorId);
-   
-
    useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -22,7 +19,6 @@ function Blog() {
   const handleDelete = async () => {
     const response =await PostInDB.deletePost(postData.$id)
     console.log(response);
-    
     if(response){
       // navigate
     }
@@ -40,8 +36,13 @@ function Blog() {
               </div>
             }
 
-            <div className='sm:text-3xl text-2xl text-center font-bold border-b-2 pb-5'>
+            <div className='font-bold border-b-2 pb-5'>
+              <div className='sm:text-3xl text-2xl text-start mb-4 cursor-pointer'>
                 <h1>{postData.title}</h1>
+              </div>
+              <div>
+                <p className='text-sm text-red-500 cursor-pointer'>Author: <Link to={`/author/${postData.$id}`}>{postData.authorName}</Link></p>
+              </div>
             </div>
             <div className='lg:w-10/12 flex items-center justify-center w-full min-w-[250px] max-h-96 m-auto overflow-hidden'>
                 {

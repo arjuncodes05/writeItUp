@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/authContext'
+import Popup from "../Popup/Popup.jsx"
 
 
 function NavLinks(){
@@ -10,10 +11,15 @@ function NavLinks(){
     const [isUser, setIsUser] = useContext(AuthContext)
     const navigate = useNavigate();
 
+    const [showPopup, setShowPopup] = useState(false)
+
     function handleNavigate(e){
         e.preventDefault()
         if(!isUser){
-            alert('NO user')
+            setShowPopup(true);
+            setTimeout(() => {
+                setShowPopup(false)
+            }, 4000)
             return 
         }
         navigate('/create/new')
@@ -21,11 +27,14 @@ function NavLinks(){
 
     return (
         <>
-            <NavLink to='/'>Home</NavLink>
-            <NavLink to='/blogs/all'>Blogs</NavLink>
-            <NavLink className={({isActive}) => isActive ? '' : '' } onClick={handleNavigate}>New Blog</NavLink>
+            <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to='/'>Home</NavLink>
+            <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to='/blogs/all'>Blogs</NavLink>
+            <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} onClick={handleNavigate} to='/create/new' >New Blog</NavLink>
             {
-                isUser ? <NavLink to={`/user/${isUser.$id}`}>Dashboard</NavLink> :
+                showPopup && <Popup status='failure' message='You need to login/signup first' className='w-[300px]' />
+            }
+            {
+                isUser ? <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to={`/user/${isUser.$id}`}>Dashboard</NavLink> :
                 <NavLink to='/login'>Login/Signup</NavLink>
             }
                 

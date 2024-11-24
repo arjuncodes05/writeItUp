@@ -14,9 +14,11 @@ export function BlogPostsProvider({children}){
         setIsLoading(true)
         try {
             const posts = await PostInDB.getPosts()
+            setIsLoading(false)
             const newPostFirst = posts.documents.reverse()
             setData(newPostFirst)
         } catch (error) {
+            setIsLoading(false)
             setIsError('Something went wrong :: ', error)
         }
     }, []) 

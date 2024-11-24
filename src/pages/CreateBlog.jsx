@@ -55,7 +55,7 @@ export default function CreateBlog() {
       }
     } else if(ifUpdate.pathname.includes('/create/new')) {
         const {$id: imageId} = await PostInDB.uploadImage(thumbnail) 
-        response = await PostInDB.createPost(title, category, content, imageId, isUser.$id)
+        response = await PostInDB.createPost(title, category, content, imageId, isUser.$id, isUser.name)
       }
     navigate('/blog', {state: {postData: response}})
   }

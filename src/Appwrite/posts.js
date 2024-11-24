@@ -26,14 +26,14 @@ class Post{
          }
     }
 
-    async createPost(title, category, content, imageId, authorId){
+    async createPost(title, category, content, imageId, authorId, authorName){
         try {
            return await this.databases.createDocument(
             config.appwriteDatabaseId,
             config.appwritePostsCollectionId,
             ID.unique(),
             {
-                title, category, content, imageId, authorId
+                title, category, content, imageId, authorId, authorName
             }
            ) 
         }catch(error){
