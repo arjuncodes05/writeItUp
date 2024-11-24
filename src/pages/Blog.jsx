@@ -29,7 +29,7 @@ function Blog() {
         <div className='lg:w-8/12 sm:w-11/12 w-12/12 h-full p-8 flex flex-col gap-5 bg-white'>
 
             {
-              isUser.$id === postData.authorId &&
+              isUser && isUser.$id === postData.authorId &&
               <div className='w-full sm:text-sm text-xs flex sm:justify-end justify-center items-center gap-4 text-white'>
                 <Link to={`/update/${postData.$id}`} state={{initialState: postData}} className='p-2 bg-cyan-600 hover:bg-cyan-700 rounded-sm '><FontAwesomeIcon icon={faPenToSquare} />Edit</Link>
                 <button onClick={handleDelete} className='p-2 bg-cyan-600 hover:bg-cyan-700 rounded-sm'><FontAwesomeIcon icon={faTrashCan} /> Delete</button>
