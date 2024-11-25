@@ -1,12 +1,16 @@
 import React from 'react'
+import logo from "../assets/logo.png"
 
 function About() {
   return (
     <div className='min-h-remaining flex w-full'>
         <div className='p-8'>
             <h1 className='md:text-4xl text-2xl font-bold mb-4'>About WriteItUp</h1>
-            <p className='text-justify'>
+            <div className='border-2 h-40 mb-20 mt-8 w-60 hover:shadow-lg'>
+              <img className='py-4 hover:drop-shadow-xl  my-4 p-5' src={logo} alt="" />
+            </div>
             <h2 className='font-semibold'>Welcome to WriteItUp - where words transform ideas, stories spark conversations, and voices find their place in the world.  </h2>
+            <p className='text-justify'>
             <br />
             At WriteItUp, we believe in the power of storytelling. Everyone has a story to tell, a perspective to share, and thoughts that can inspire change. Our mission is to create a space where creativity flourishes, knowledge is shared, and connections are built through the art of writing. Whether you're an aspiring blogger, a seasoned writer, or simply someone with a passion for sharing ideas, we're here to help you express yourself and reach an audience that values your voice.  
             <br />

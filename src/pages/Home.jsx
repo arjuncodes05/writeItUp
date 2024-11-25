@@ -33,8 +33,8 @@ function Home() {
             )
           }
           { 
-            data && (       
-            <div className='w-full flex justify-end items-end'>
+            data && data.length > 0 && (       
+            <div className='w-full flex justify-end items-end mt-2'>
               <Link className='text-end rounded-md p-2 bg-cyan-500 hover:bg-cyan-600 font-semibold text-white' to="/blogs/all">Read More</Link>
             </div>)
           }
