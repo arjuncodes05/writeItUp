@@ -25,7 +25,7 @@ function Home() {
             )
           }
           {
-            data && data.length < 1 (
+            data && data.length < 1 && (
               <div className='bg-white h-[245px] md:h-[295px] p-4 mt-4 opacity-40 w-full flex flex-col items-center'>
                 <img className='sm:h-40 h-40 mb-2' src={noBlogs} alt="" />
                 <h2 className='text-xl text-gray-500 text-center font-bold'>No Blogs yet.</h2>
