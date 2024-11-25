@@ -19,10 +19,7 @@ function Blog() {
   }, [])
 
   const handleDelete = async () => {
-    console.log(postData);
-    
     const response =await PostInDB.deletePost(postData.$id)
-    console.log(response);
     if(response){
       navigate(`/user/${postData.authorId}`)
     }
@@ -41,11 +38,11 @@ function Blog() {
             }
 
             <div className='font-bold border-b-2 pb-5'>
-              <div className='sm:text-3xl text-2xl text-start mb-4 cursor-pointer'>
+              <div className='sm:text-3xl text-2xl text-start mb-4 cursor-default'>
                 <h1>{postData.title}</h1>
               </div>
               <div>
-                <p className='text-sm text-red-500 cursor-pointer'>Author: <Link to={`/author/${postData.$id}`}>{postData.authorName}</Link></p>
+                <p className='text-sm text-red-500 cursor-default'>Author: {postData.authorName}</p>
               </div>
             </div>
             <div className='lg:w-10/12 flex items-center justify-center w-full min-w-[250px] max-h-96 m-auto overflow-hidden'>
@@ -57,7 +54,7 @@ function Blog() {
             </div>
 
             {/* <div className="prose" dangerouslySetInnerHTML={{ __html: postData.content }} /> */}
-            <div className="prose max-w-none border-t-2 pt-10">
+            <div className="prose max-w-none border-t-2 pt-10 cursor-default">
               {parse(postData.content)}
             </div>
         </div>
