@@ -5,7 +5,7 @@ WriteItUp is a sleek and modern blogging platform designed to make writing and s
 ---
 
 ## **Features**
-
+- **Rich Text Editing:** Powered by **TinyMCE**, offering a seamless content creation experience.
 - **Easy Posting:** Create, edit, and delete blog posts effortlessly.
 - **User Accounts:** Secure login/signup for personalized content management.
 - **Content Control:** Posts can only be edited or deleted by their creators.
@@ -17,6 +17,7 @@ WriteItUp is a sleek and modern blogging platform designed to make writing and s
 
 - **Frontend:** React.js
 - **Styling:** Tailwind CSS
+- **Rich Text Editor:** TinyMCE  
 - **Backend:** Appwrite
 - **Authentication:** Secure login/signup system using Appwrite.
 
