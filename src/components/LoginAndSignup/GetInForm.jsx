@@ -19,6 +19,7 @@ function GetInForm() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)  
   const [error, setError] = useState('')
+  const [errorForIncorrectCredentials, setErrorForIncorrectCredentials] = useState('')
 
 
   const handleSubmit = async (e) => {
@@ -52,6 +53,9 @@ function GetInForm() {
             setIsUser(user)
             setLoading(false)
             navigate(`/user/${user.$id}`)
+        } else {
+            setLoading(false)
+            setErrorForIncorrectCredentials('Invalid Credentials')
         }
     }
   }
@@ -71,7 +75,7 @@ function GetInForm() {
                 }
                 <Input setError={setError} error={error} value={email} setValue={setEmail} id='email' label ='Email' type='text' />
                 <Input setError={setError} error={error} value={password} setValue={setPassword} id='password' label ='Password' type='password' />
-                <Button text={pathname === '/signup' ? (loading ? 'Signing up...' : 'Signup') : (loading ? 'Logging in...' : 'Login')} />
+                <Button errorForIncorrectCredentials={errorForIncorrectCredentials} text={pathname === '/signup' ? (loading ? 'Signing up...' : 'Signup') : (loading ? 'Logging in...' : 'Login')} />
             </form>
         </div>
     </div>
