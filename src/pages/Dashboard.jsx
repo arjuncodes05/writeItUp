@@ -51,7 +51,7 @@ function Dashboard() {
         </div>
       </div>
       <div className='md:px-8 sm:px-4 px-2 py-4 bg-secondary w-full flex flex-col flex-1 items-center'>
-        <h1 className='cursor-pointer text-center text-lg sm:text-2xl font-bold p-2 bg-cyan-500 text-white'>My Blogs</h1>
+        <h1 className='cursor-default text-center text-lg sm:text-2xl font-bold p-2 bg-cyan-500 text-white'>My Blogs</h1>
         {
           myPosts.length > 0 ? (
             myPosts.map((post) => {

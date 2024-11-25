@@ -12,6 +12,7 @@ import Blog from './pages/Blog.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import { AuthProvider } from './context/authContext.jsx'
+import About from './pages/About.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/update/:postId',
         element: <CreateBlog/>,
+      },
+      {
+        path: '/about',
+        element: <About/>,
       },
       {
         path: '/user/:userId',

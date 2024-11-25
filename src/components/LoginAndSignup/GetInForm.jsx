@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 import {Link, useLocation, useNavigate } from 'react-router-dom'
 import authService from '../../Appwrite/AuthService'
 import { AuthContext } from '../../context/authContext'
+import { formValidation } from './formValidation'
 
 function GetInForm() {
   const {pathname} =   useLocation() 
@@ -17,12 +18,21 @@ function GetInForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)  
+  const [error, setError] = useState('')
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
+
     
     if(pathname === '/signup'){
+        const response = formValidation({username, email, password}, setError)
+        if(Object.keys(response).length){
+            setLoading(false)
+            return
+        }
+        
         const user = await authService.createAccount(email, password, username)       
         if(user){
             setIsUser(user)
@@ -30,6 +40,12 @@ function GetInForm() {
             navigate(`/user/${user.$id}`)
         }
     } else if(pathname === '/login'){
+        const response = formValidation({email, password}, setError)
+        if(Object.keys(response).length){
+            setLoading(false)
+            return
+        }
+
         const session = await authService.login(email, password)
         if(session){
             const user = await authService.getUser()
@@ -49,12 +65,12 @@ function GetInForm() {
                 </div>
                 <h1 className='text-2xl'>{pathname === '/signup' ? 'Signup' : 'Login'}</h1>
             </div>
-            <form onSubmit={handleSubmit} className='m-4 p-4'>
+            <form onSubmit={handleSubmit} className='m-4 sm:p-4'>
                 {
-                    pathname === '/signup' && <Input value={username} setValue={setUsername} id='name' label ='Name' type='text' />
+                    pathname === '/signup' && <Input setError={setError} error={error} value={username} setValue={setUsername} id='username' label ='Name' type='text' />
                 }
-                <Input value={email} setValue={setEmail} id='email' label ='Email' type='text' />
-                <Input value={password} setValue={setPassword} id='password' label ='Password' type='password' />
+                <Input setError={setError} error={error} value={email} setValue={setEmail} id='email' label ='Email' type='text' />
+                <Input setError={setError} error={error} value={password} setValue={setPassword} id='password' label ='Password' type='password' />
                 <Button text={pathname === '/signup' ? (loading ? 'Signing up...' : 'Signup') : (loading ? 'Logging in...' : 'Login')} />
             </form>
         </div>

@@ -29,7 +29,8 @@ function NavLinks(){
         <>
             <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to='/'>Home</NavLink>
             <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to='/blogs/all'>Blogs</NavLink>
-            <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} onClick={handleNavigate} to='/create/new' >New Blog</NavLink>
+            {/* <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} onClick={handleNavigate} to='/create/new' >New Blog</NavLink> */}
+            <NavLink className={({isActive}) => `px-4 py-1 rounded-full ${isActive && 'bg-red-300'}`} to='/about' >About</NavLink>
             {
                 showPopup && <Popup status='failure' message='You need to login/signup first' className='w-[300px]' />
             }
@@ -54,7 +55,7 @@ function Nav() {
   return (
     <>
         <nav className='sm:w-7/12 md:w-3/6 lg:w-2/5 flex justify-end'>
-            <div className='hidden sm:flex justify-between w-full'>
+            <div className='hidden sm:flex justify-between w-full font-semibold'>
                 <NavLinks/>
             </div>
 
