@@ -20,7 +20,7 @@ function Blogs() {
   }, [fetchData])
 
   return ( 
-    <div className='md:px-8 sm:px-4 px-2 py-4 min-h-remaining bg-secondary w-full flex flex-col justify-center items-center'>
+    <div className='md:px-8 sm:px-4 px-2 py-4 min-h-remaining bg-secondary w-full flex flex-col justify-start items-center'>
         {
           isLoading && (<img src={loading2} alt="" />)
         }

@@ -20,19 +20,20 @@ export default function CreateBlog() {
   const [isUser, setIsUser] = useContext(AuthContext)
 
   const handleEditorChange = (newContent) => {
-    setContent(newContent);    
+    setContent(newContent);        
   };
 
   // let {postId} = useParams()
   const ifUpdate = useLocation()
-  let [initialState, setInitialState] = useState('');
+  let [getInitialState, setGetInitialState] = useState('');
   useEffect(() => {
     if(ifUpdate.pathname.includes('/update/')){
-      const {state: {initialState}} = ifUpdate
-      setTitle(initialState.title)
-      setCategory(initialState.category)
-      setInitialValue(initialState.content)
-      setInitialState(initialState);
+      const {state: {initialState: initialDataToUpdate}} = ifUpdate      
+      setTitle(initialDataToUpdate.title)
+      setCategory(initialDataToUpdate.category)
+      setInitialValue(initialDataToUpdate.content)
+      setContent(initialDataToUpdate.content)
+      setGetInitialState(initialDataToUpdate);
     }
   }, [])
 
@@ -49,9 +50,9 @@ export default function CreateBlog() {
     if(ifUpdate.pathname.includes('/update/')){
       if(thumbnail){
         const {$id: imageId} = await PostInDB.uploadImage(thumbnail) 
-        response = await PostInDB.updatePost(initialState.$id, {title, category, content, imageId})
+        response = await PostInDB.updatePost(getInitialState.$id, {title, category, content, imageId})
       } else {
-        response = await PostInDB.updatePost(initialState.$id, {title, category, content})
+        response = await PostInDB.updatePost(getInitialState.$id, {title, category, content})
       }
     } else if(ifUpdate.pathname.includes('/create/new')) {
         const {$id: imageId} = await PostInDB.uploadImage(thumbnail) 

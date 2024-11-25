@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import parse from 'html-react-parser';
 import PostInDB from '../Appwrite/posts';
@@ -12,15 +12,19 @@ function Blog() {
    const {state: {postData}} =  useLocation()
    const [isUser, setIsUser] = useContext(AuthContext)
 
+   const navigate = useNavigate();
+
    useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   const handleDelete = async () => {
+    console.log(postData);
+    
     const response =await PostInDB.deletePost(postData.$id)
     console.log(response);
     if(response){
-      // navigate
+      navigate(`/user/${postData.authorId}`)
     }
   }
    
